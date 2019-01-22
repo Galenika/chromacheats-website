@@ -1,0 +1,19 @@
+SetEnv REGISTER_GLOBALS 1
+
+# dont allow directory browsing
+
+Options -Indexes 
+
+# enable the rewrite engine
+
+RewriteEngine on
+
+# force non-www
+
+RewriteCond %{HTTP_HOST} ^www\.
+
+RewriteCond %{HTTPS}s ^on(s)|off
+
+RewriteCond http%1://%{HTTP_HOST} ^(https?://)(www\.)?(.+)$
+
+RewriteRule ^ %1%3%{REQUEST_URI} [R=301,L]
